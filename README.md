@@ -1,5 +1,5 @@
 # vertx-starter
-Sample application built in Vertx.
+Sample application built in Vertx using the RxVertx.
 
 ## Getting Started
 
