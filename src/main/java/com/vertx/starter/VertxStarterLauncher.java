@@ -34,6 +34,16 @@ public class VertxStarterLauncher extends VertxCommandLauncher implements VertxL
 	}
 
 	@Override
+	public void beforeStoppingVertx(Vertx vertx) {
+
+	}
+
+	@Override
+	public void afterStoppingVertx() {
+
+	}
+
+	@Override
 	public void handleDeployFailed(Vertx vertx, String mainVerticle, DeploymentOptions deploymentOptions,
 			Throwable cause) {
 		// TODO Auto-generated method stub

@@ -1,15 +1,18 @@
 package com.vertx.starter;
 
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
-import io.vertx.rxjava.core.AbstractVerticle;
-import io.vertx.rxjava.core.http.HttpServer;
-import io.vertx.rxjava.core.http.HttpServerResponse;
-import io.vertx.rxjava.ext.web.Router;
-import rx.Single;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
 
 public class MainVerticle extends AbstractVerticle {
+
+	public static WebClient webclient;
 
 	@Override
 	public void start(Future<Void> startFuture) {
@@ -22,23 +25,25 @@ public class MainVerticle extends AbstractVerticle {
 		            .putHeader("content-type", "application/json")
 		            .end(new JsonObject().put("Welcome!", "Ok").toString());
 		      });
+		    WebClientOptions options = new WebClientOptions();
+		    options.setConnectTimeout(20000);
+		    options.setMaxPoolSize(10);
+			options.setLogActivity(true);
+			webclient = WebClient.create(vertx);
 		    MainHandler handler = new MainHandler();
-		    router.get("/:id").handler(handler::get);
+		    //router.get("/:id").handler(handler::get);
 		    router.get("/fetch").handler(handler::fetch);
-			Single<HttpServer> server = createHttpServer(null, router, "localhost", 8080);
-			server.subscribe(result -> {
-				startFuture.complete();
-				System.out.println("Vertx initialized");
-			});
+			router.get("/execute").handler(handler::execute);
+			HttpServer server = createHttpServer(null, router, "localhost", 8080);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	protected Single<HttpServer> createHttpServer(HttpServerOptions httpOptions, Router router, String host, int port) {
-		Single<HttpServer> server = vertx.createHttpServer()
+	protected HttpServer createHttpServer(HttpServerOptions httpOptions, Router router, String host, int port) {
+		HttpServer server = vertx.createHttpServer()
 										 .requestHandler(router::accept)
-										 .rxListen(port, host);
+										 .listen(8080);
 		return server;
 	}
 
