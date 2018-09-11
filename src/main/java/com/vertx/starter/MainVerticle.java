@@ -31,7 +31,7 @@ public class MainVerticle extends AbstractVerticle {
 			options.setLogActivity(true);
 			webclient = WebClient.create(vertx);
 		    MainHandler handler = new MainHandler();
-		    //router.get("/:id").handler(handler::get);
+		    router.get("/get").handler(handler::get);
 		    router.get("/fetch").handler(handler::fetch);
 			router.get("/execute").handler(handler::execute);
 			HttpServer server = createHttpServer(null, router, "localhost", 8080);
