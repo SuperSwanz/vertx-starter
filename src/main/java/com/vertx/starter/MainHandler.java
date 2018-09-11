@@ -31,8 +31,8 @@ public class MainHandler implements Handler<RoutingContext> {
     public void get(RoutingContext event) {
         final String data = event.request().getParam("id");
         final JsonObject response = new JsonObject().put("Get called with id: " + data, "Ok");
-        //event.response().putHeader("content-type", "application/json").putHeader("content-length", response.size() + "").end(response.toString());
-        event.response().putHeader("content-type", "application/json").end(response.toString());
+        event.response().putHeader("content-type", "application/json").putHeader("content-length", response.size() + "").end(response.toString());
+        //event.response().putHeader("content-type", "application/json").end(response.toString());
     }
 
     public void fetch(RoutingContext event) {
