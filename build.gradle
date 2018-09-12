@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		vertxVersion		=	"3.5.2"
+		vertxVersion		=	"3.5.3"
 		gradleVersion		=	"3.5"
 		sourceJavaVersion	=	"1.8"
 		targetJavaVersion	=	"1.8"
