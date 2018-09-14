@@ -21,13 +21,13 @@ This application set-up the RxVertx instance and showcase a sample Rest applicat
 ## Running the app
 
 For running the app, (IDE used here is Eclipse)
-- Right click on the project("vertx-starter"), <br />select "Run As" -> "Run Configurations". Set:
+- Use VerticleDeployer to run the application or alternatively, right click on the project("vertx-starter"), <br />select "Run As" -> "Run Configurations". Set:
   * **Main class**: com.vertx.starter.VertxStarterLauncher
   * **Program arguments**: <br />run com.vertx.starter.MainVerticle
 After setting the variables, click "Run".
 - If app starts successfull, goto **http://localhost:8080/**. Welcome json {"Welcome!":"Ok"} will be served as response.
 - To call other handlers, do <br />
-* GET http://localhost:8080/get* <br />
+* GET http://localhost:8080/get <br />
 * Response would be: <br />
 ```json
 {
